@@ -292,7 +292,7 @@ function parseTimer() {
 								vkWallPosts.posts[currentGroupPost].ourComments = {};
 							}
 							for (var i = 0; i < bodyArray.response.profiles.length; i++) {
-								if (config.vk.profiles[bodyArray.response.profiles[i].id]) {
+								if (config.vk.profiles[bodyArray.response.profiles[i].id] && !vkWallPosts.posts[currentGroupPost].ourComments[bodyArray.response.profiles[i].id]) {
 									vkWallPosts.posts[currentGroupPost].ourComments[bodyArray.response.profiles[i].id] = true;
 									writeVkWallPosts();
 								}
