@@ -1,0 +1,11 @@
+{
+    "uid": "parsavk",
+    "append": true,
+    "watch": false,
+    "script": "parsavk.js",
+    "sourceDir": "/path/to/parsavk",
+	"workingDir": "/path/to/parsavk",
+    "logFile": "/path/to/parsavk/logs/forever.log",
+    "outFile": "/path/to/parsavk/logs/out.log",
+    "errFile": "/path/to/parsavk/logs/error.log"
+}
