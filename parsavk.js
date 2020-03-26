@@ -6,6 +6,8 @@ console.log("|==================================|");
 var START_STR = 'PARSAVK is enabled';
 var STOP_STR = 'PARSAVK is disabled';
 
+var PARSE_TIME = 10000;
+
 var Telegram = require('node-telegram-bot-api');
 var yargs = require('yargs');
 var https = require('https');
@@ -146,7 +148,7 @@ function sendAllPostsToTelegram(v) {
 			telegram_post(s, 'markdown');
 			setTimeout(function () {
 				sendAllPostsToTelegram(i + 1);
-			}, 1500);
+			}, 2000);
 			return;
 		}
 	}
@@ -224,7 +226,7 @@ function parsePostKey(groupPostKey) {
 	return groupPostArray;
 }
 
-setTimeout(parseTimer, 1000);
+setTimeout(parseTimer, PARSE_TIME);
 
 function cacheGroupName(what) {
 	if (what.charAt(0) == "-") {
@@ -260,13 +262,13 @@ function cacheGroupName(what) {
 
 function parseTimer() {
 	if (vkWallPosts.list.length == 0) {
-		setTimeout(parseTimer, 1000);
+		setTimeout(parseTimer, PARSE_TIME);
 		return;
 	}
 	var currentGroupPost = vkWallPosts.list[vkWallPosts.current];
 	if (!currentGroupPost) {
 		vkWallPosts.current = 0;
-		setTimeout(parseTimer, 1000);
+		setTimeout(parseTimer, PARSE_TIME);
 		return;
 	}
 	var currentGroupPostParsed = parsePostKey(currentGroupPost);
@@ -327,15 +329,11 @@ function parseTimer() {
 						// console.log("vk_getComments_callback error: group " + currentGroupPostParsed[0] + ", post " + currentGroupPostParsed[1] + ", " + body);
 					}
 				}
-				if (operandExtended == 1) {
-					setTimeout(parseTimer, 1000);
-				} else {
-					setTimeout(parseTimer, 400);
-				}
+				setTimeout(parseTimer, PARSE_TIME);
 			});
 		} else {
 			cacheGroupName(currentGroupPostParsed[0]);
-			setTimeout(parseTimer, 400);
+			setTimeout(parseTimer, PARSE_TIME);
 			return;
 		}
 	}
